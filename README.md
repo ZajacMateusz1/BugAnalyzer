@@ -20,6 +20,11 @@ The application receives a bug report, sends it to Gemini for analysis, validate
 - Centralized error handling
 - PostgreSQL transactions
 
+## OOP
+
+This project uses object-oriented programming in selected parts of the backend.
+Since the project is relatively small this is not necessary from a practical perspective. They were introduced primarily for educational purposes and to gain hands-on experience with OOP in a backend application.
+
 ## Technologies
 
 - [**Node.js**](https://nodejs.org/)
