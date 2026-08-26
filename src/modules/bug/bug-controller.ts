@@ -1,7 +1,7 @@
 import type { Request, Response, NextFunction } from "express";
 import type { originalBugType } from "./bug-schema.js";
 
-import { BugService } from "./bug-service.js";
+import type { BugService } from "./bug-service.js";
 
 export class BugController {
   constructor(private readonly service: BugService) {}

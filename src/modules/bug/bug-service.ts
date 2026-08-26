@@ -1,7 +1,7 @@
-import gemini from "../../config/gemini.js";
 import HttpError from "../../errors/HttpError.js";
 
-import { BugRepository } from "./bug-repository.js";
+import type { GeminiService } from "./gemini-service.js";
+import type { BugRepository } from "./bug-repository.js";
 
 import {
   type originalBugType,
@@ -10,59 +10,13 @@ import {
 } from "./bug-schema.js";
 
 export class BugService {
-  constructor(private readonly repository: BugRepository) {}
+  constructor(
+    private readonly repository: BugRepository,
+    private readonly geminiService: GeminiService,
+  ) {}
   async analyzeBug(bugData: originalBugType) {
     const orginalBug = await this.repository.saveOrginalBugData(bugData);
-    const interaction = await gemini.interactions.create({
-      model: "gemini-3.1-flash-lite",
-      input: `You are an professional backend error analyzer.
-
-Analyze the provided backend error and return a structured response.
-
-Your task:
-1. Determine the most likely category of the error.
-2. Determine its priority based on potential impact.
-3. Identify the most probable root cause.
-4. Suggest a practical fix.
-5. Estimate your confidence in the analysis.
-
-Rules:
-- Analyze only the information provided in the bug report.
-- Do not invent missing information.
-- If the root cause cannot be determined reliably, state that in probableCause.
-- Prefer the most likely explanation rather than listing many possibilities.
-- The suggestedFix should be specific and actionable.
-- Confidence must be between 0 and 1.
-- Treat the priority as:
-  P1 = critical functionality is unavailable or the application is severely affected.
-  P2 = important functionality is broken or significantly degraded.
-  P3 = limited impact or a workaround exists.
-  P4 = minor issue with low impact.
-
-Available categories:
-- DATABASE
-- API
-- AUTH
-- BUSINESS_LOGIC
-- EXTERNAL_SERVICE
-- CONFIGURATION
-- WEBSOCKET
-- UNKNOWN
-
-Bug report: ${JSON.stringify(bugData)}`,
-
-      response_format: {
-        type: "text",
-        mime_type: "application/json",
-        schema: analyzeBugJSONSchema,
-      },
-    });
-    const geminiOutput = interaction.output_text;
-    if (!geminiOutput) {
-      throw new HttpError("Gemini output is empty", 500);
-    }
-    const analysisResult = analyzeBugSchema.parse(JSON.parse(geminiOutput));
-    console.log(analysisResult);
+    const analysisResult = await this.geminiService.analyzeBug(bugData);
     return analysisResult;
   }
 }
