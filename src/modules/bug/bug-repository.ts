@@ -13,7 +13,7 @@ export class BugRepository {
     try {
       await client.query("BEGIN");
 
-      const savedBug = await this.pool.query(
+      const savedBug = await client.query(
         "INSERT INTO bugs (service, method, path, name, message, stack) VALUES ($1, $2, $3, $4, $5, $6) RETURNING id",
         [
           originalBugData.service,
@@ -25,7 +25,7 @@ export class BugRepository {
         ],
       );
 
-      const savedAnalysis = await this.pool.query(
+      const savedAnalysis = await client.query(
         "INSERT INTO bug_analysis (bug_id, priority, category, probable_cause, suggested_fix, confidence) VALUES ($1, $2, $3, $4, $5, $6) RETURNING id",
         [
           savedBug.rows[0].id,

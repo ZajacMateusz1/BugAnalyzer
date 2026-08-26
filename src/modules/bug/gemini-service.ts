@@ -1,6 +1,6 @@
 import type { GoogleGenAI } from "@google/genai";
 
-import { HttpError } from "../../errors/HttpError.js";
+import HttpError from "../../errors/HttpError.js";
 
 import {
   type originalBugType,
