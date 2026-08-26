@@ -32,4 +32,10 @@ export class BugRepository {
     );
     return savedAnalysis.rows[0];
   }
+  async getBugsWithAnalysis() {
+    const result = await this.pool.query(
+      "SELECT * FROM bugs JOIN bug_analysis ON bugs.id = bug_analysis.bug_id",
+    );
+    return result.rows;
+  }
 }

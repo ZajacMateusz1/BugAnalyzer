@@ -15,6 +15,7 @@ const geminiService = new GeminiService(gemini);
 const service = new BugService(repository, geminiService);
 const controller = new BugController(service);
 
+router.get("/", (req, res, next) => controller.getBugs(req, res, next));
 router.post("/analyze", validate(originalBugSchema), (req, res, next) =>
   controller.analyzeBug(req, res, next),
 );

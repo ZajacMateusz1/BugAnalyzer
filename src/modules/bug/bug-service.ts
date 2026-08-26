@@ -18,4 +18,8 @@ export class BugService {
     );
     return response;
   }
+  async getBugs() {
+    const bugs = await this.repository.getBugsWithAnalysis();
+    return bugs;
+  }
 }

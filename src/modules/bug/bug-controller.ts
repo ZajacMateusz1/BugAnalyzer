@@ -14,4 +14,12 @@ export class BugController {
       next(error);
     }
   }
+  async getBugs(req: Request, res: Response, next: NextFunction) {
+    try {
+      const bugs = await this.service.getBugs();
+      res.status(200).json(bugs);
+    } catch (error) {
+      next(error);
+    }
+  }
 }
