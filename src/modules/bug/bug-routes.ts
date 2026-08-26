@@ -1,5 +1,6 @@
 import { Router } from "express";
 import gemini from "../../config/gemini.js";
+import pool from "../../config/postgres.js";
 import validate from "../../middlewares/validate.js";
 import { originalBugSchema } from "./bug-schema.js";
 import { BugController } from "./bug-controller.js";
@@ -9,7 +10,7 @@ import { BugRepository } from "./bug-repository.js";
 
 const router = Router();
 
-const repository = new BugRepository();
+const repository = new BugRepository(pool);
 const geminiService = new GeminiService(gemini);
 const service = new BugService(repository, geminiService);
 const controller = new BugController(service);
