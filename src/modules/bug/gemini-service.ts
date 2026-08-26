@@ -38,7 +38,6 @@ Available categories:
 - BUSINESS_LOGIC
 - EXTERNAL_SERVICE
 - CONFIGURATION
-- WEBSOCKET
 - UNKNOWN
 
 Bug report:`;

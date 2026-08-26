@@ -33,6 +33,7 @@ export const analyzeBugSchema = z.object({
     "API",
     "AUTH",
     "CONFIGURATION",
+    "BUSINESS_LOGIC",
     "EXTERNAL_SERVICE",
     "UNKNOWN",
   ]),
