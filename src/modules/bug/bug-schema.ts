@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-export const analyzeBugSchema = z.object({
+export const originalBugSchema = z.object({
   service: z
     .string()
     .min(1, { error: "Service is required" })
@@ -24,4 +24,23 @@ export const analyzeBugSchema = z.object({
     .optional(),
 });
 
-export type AnalyzeBugType = z.infer<typeof analyzeBugSchema>;
+export type originalBugType = z.infer<typeof originalBugSchema>;
+
+export const analyzeBugSchema = z.object({
+  priority: z.enum(["P1", "P2", "P3", "P4"]),
+  category: z.enum([
+    "DATABASE",
+    "API",
+    "AUTH",
+    "CONFIGURATION",
+    "EXTERNAL_SERVICE",
+    "UNKNOWN",
+  ]),
+  probableCause: z.string().min(1),
+  suggestedFix: z.string().min(1),
+  confidence: z.number().min(0).max(1),
+});
+
+export const analyzeBugJSONSchema = z.toJSONSchema(analyzeBugSchema);
+
+export type analyzeBugType = z.infer<typeof analyzeBugSchema>;
