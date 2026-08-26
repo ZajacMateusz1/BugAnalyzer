@@ -1,11 +1,13 @@
 import express from "express";
 import HttpError from "./errors/HttpError.js";
 import errorHandler from "./middlewares/error-handler.js";
+import checkAuth from "./middlewares/check-auth.js";
 
 import bugRoutes from "./modules/bug/bug-routes.js";
 
 const app = express();
 
+app.use(checkAuth);
 app.use(express.json());
 app.get("/health", (req, res) => {
   res.status(200).json({ status: "ok" });

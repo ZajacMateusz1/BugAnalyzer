@@ -12,6 +12,7 @@ const envSchema = z.object({
     .string()
     .min(1, { error: "POSTGRES_PASSWORD is required" }),
   GEMINI_API_KEY: z.string().min(1, { error: "Gemini_API_KEY is required" }),
+  SECRET_KEY: z.string().min(1, { error: "SECRET_KEY is required" }),
 });
 
 export const env = envSchema.parse(process.env);
