@@ -7,12 +7,12 @@ import bugRoutes from "./modules/bug/bug-routes.js";
 
 const app = express();
 
-app.use(checkAuth);
 app.use(express.json());
 app.get("/health", (req, res) => {
   res.status(200).json({ status: "ok" });
 });
 
+app.use(checkAuth);
 app.use("/api/bugs", bugRoutes);
 
 app.use((req, res, next) => {

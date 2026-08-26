@@ -9,11 +9,9 @@ export class BugService {
     private readonly geminiService: GeminiService,
   ) {}
   async analyzeBug(originalBugData: originalBugType) {
-    const originalBug =
-      await this.repository.saveOrginalBugData(originalBugData);
     const analysisResult = await this.geminiService.analyzeBug(originalBugData);
-    const response = await this.repository.saveAnalyzedBugData(
-      originalBug.id,
+    const response = await this.repository.saveBugWithAnalysis(
+      originalBugData,
       analysisResult,
     );
     return response;
