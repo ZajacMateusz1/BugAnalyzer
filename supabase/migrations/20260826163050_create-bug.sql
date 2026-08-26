@@ -1,0 +1,10 @@
+CREATE TABLE bugs (
+    id SERIAL PRIMARY KEY,
+    service VARCHAR(100) NOT NULL,
+    method VARCHAR(100) NOT NULL,
+    path VARCHAR(255) NOT NULL,
+    name VARCHAR(255) NOT NULL,
+    message TEXT NOT NULL,
+    stack VARCHAR(255),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
