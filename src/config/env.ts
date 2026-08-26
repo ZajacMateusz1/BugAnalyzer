@@ -1,7 +1,7 @@
 import { z } from "zod";
 
 const envSchema = z.object({
-  PORT: z.string().transform((value) => Number(value) || 3000),
+  PORT: z.string().transform((value) => Number(value) || 5000),
   POSTGRES_HOST: z.string().min(1, { error: "POSTGRES_HOST is required" }),
   POSTGRES_PORT: z.string().transform((value) => Number(value) || 5432),
   POSTGRES_DATABASE: z
