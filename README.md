@@ -1,4 +1,4 @@
-# BugAnalyzer
+# Bug Analyzer
 
 ## Description
 
@@ -35,6 +35,7 @@ Since the project is relatively small this is not necessary from a practical per
 - [**Supabase**](https://supabase.com/)
 - [**PostgreSQL**](https://www.postgresql.org/)
 - [**node-postgres**](https://node-postgres.com/)
+- [**Docker**](https://docs.docker.com/get-started/)
 
 ## Project Structure
 
@@ -139,6 +140,26 @@ Start the development server:
 
 ```bash
 npm run dev
+```
+
+The API will be available at:
+
+```text
+http://localhost:5000
+```
+
+## Docker
+
+Build the Docker image:
+
+```bash
+docker build -t buganalyzer .
+```
+
+Run the container:
+
+```bash
+docker run --env-file .env -p 5000:5000 buganalyzer
 ```
 
 The API will be available at:

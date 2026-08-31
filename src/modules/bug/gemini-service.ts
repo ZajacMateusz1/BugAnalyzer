@@ -8,7 +8,7 @@ import {
   analyzeBugJSONSchema,
 } from "./bug-schema.js";
 
-const PROMPT = `You are an professional backend error analyzer.
+const PROMPT = `You are a professional backend error analyzer.
 Analyze the provided backend error and return a structured response.
 
 Your task:
